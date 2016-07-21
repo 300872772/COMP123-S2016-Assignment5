@@ -11,7 +11,7 @@ using System.IO;
 * Date last modified: July 20, 2016  
 * Description: This program read text file and handle exceptions   
 *   
-* Version: 0.0.2 - added readFile method
+* Version: 0.0.3 - added displayRecord method
 */
 
 namespace File_IO_and_Exception_Handling
@@ -23,13 +23,14 @@ namespace File_IO_and_Exception_Handling
         static void Main(string[] args)
         {
             _readFile();
-
+            _displaRecords();
+            Console.ReadKey();
         }
 
         private static void _readFile()
         {
-            // try
-            // {
+             try
+             {
             const string FILENAME = "..\\..\\grade.txt";
             const char DELIM = ',';
 
@@ -61,27 +62,26 @@ namespace File_IO_and_Exception_Handling
                 recordString = streamReader.ReadLine();
             }
 
-            for (int ii = 0; ii < _studentData.Count; ii++)
-            {
-                foreach (var item in _studentData[ii])
-                {
-                    Console.WriteLine(item);
-                }
+
+                streamReader.Close();
+                fileStream.Close();
+            }
+             catch (Exception exception)
+             {
+                Console.WriteLine("Error: " + exception.Message);
 
             }
 
-            //}
-            //  catch (Exception exception)
-            //  {
-
-
-            // }
-            Console.ReadKey();
+            
         }
 
         private static void _displaRecords()
         {
-
+            for (int i = 0; i < _studentData.Count; i++)
+            {
+                Console.WriteLine("{0}, {1}: {2} {3}, {4}", _studentData[i][1],
+                    _studentData[i][2], _studentData[i][0], _studentData[i][3], _studentData[i][1]);
+            }
         }
     }
 }
