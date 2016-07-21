@@ -116,11 +116,16 @@ namespace File_IO_and_Exception_Handling
         {
             try
             {
-                const string FILENAME = "..\\..\\grade.txt";
+                Console.WriteLine();
+                Console.Write("Enter the name of the file: " );
+                string readFileName = Console.ReadLine();
+                Console.WriteLine();
+
+                string fileName = "..\\..\\" + readFileName + ".txt";
                 const char DELIM = ',';
 
                 //Opening filestream
-                FileStream fileStream = new FileStream(FILENAME, FileMode.Open, FileAccess.Read);
+                FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
 
                 StreamReader streamReader = new StreamReader(fileStream);
 
@@ -151,12 +156,14 @@ namespace File_IO_and_Exception_Handling
                 streamReader.Close();
                 fileStream.Close();
             }
+            catch (FileNotFoundException exception)
+            {
+                    Console.WriteLine("No such file");
+             }
             catch (Exception exception)
             {
                 Console.WriteLine("Error: " + exception.Message);
-
             }
-
 
         }
         /**
@@ -184,6 +191,7 @@ namespace File_IO_and_Exception_Handling
                 
             }
             Console.WriteLine();
+            _studentData.RemoveRange(0,_studentData.Count);
         }
     }
 }
